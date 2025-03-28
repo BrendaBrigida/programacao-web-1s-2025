@@ -8,7 +8,8 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/ola/:nome', (req, res)=>{
-    res.send('Olá', ${req.params.nome}!);
+    res.send(`Olá, ${req.params.nome}!`);
+
 });
 
 

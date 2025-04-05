@@ -1,4 +1,4 @@
-let itens = [];
+let itens = []; //
 
 function adicionar(item){
     let item_valido = validar_item_a_cadastrar(item);
@@ -74,3 +74,4 @@ function validar_item_a_cadastrar(item){
     return item_valido;
 }
 
+/*a*/

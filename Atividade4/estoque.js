@@ -1,5 +1,6 @@
 let itens = []; //
 
+
 function adicionar(item){
     let item_valido = validar_item_a_cadastrar(item);
     

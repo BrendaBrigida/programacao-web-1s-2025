@@ -1,4 +1,5 @@
-let itens = [];
+let itens = []; //
+
 
 function adicionar(item){
     let item_valido = true;
@@ -68,3 +69,5 @@ function is_numerico(n){
     }
     return true;
 }
+
+/*a*/

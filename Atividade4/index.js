@@ -2,6 +2,7 @@ const express = require('express');
 const estoque = require('./estoque');
 const app     = express();
 
+
 app.get('/', (req, res)=>{
     let html =  '<h1>app_estoque</h1>';
     html     += '<h3>Rotas disponíveis:</h3>';

@@ -1,12 +1,22 @@
 let itens = [];
 
 function adicionar(item){
-    let item_valido = validar_item_a_cadastrar(item);
-    
+    let item_valido = true;
+
+    if(
+        !is_numerico(item.id) ||
+        is_id_cadastrado(item.id) ||
+        item.id <= 0 ||
+        !is_numerico(item.qtd) ||
+        item.qtd < 0 ||
+        item.nome.length <= 0
+    ){
+        item_valido = false;
+    }
+
     if(item_valido){
         itens.push(item);
     }
-
     return item_valido;
 }
 
@@ -15,26 +25,41 @@ function listar(){
 }
 
 function editar(id, qtd){
+    let item_valido = true;
+
     if(
-        !is_numerico(id) || 
+        !is_numerico(id) ||
         !is_id_cadastrado(id) ||
-        !is_numerico(qtd) ||
-        qtd < 0
+        !is_numerico(qtd)
     ){
-        return false;
+        item_valido = false;
     }
-    itens.forEach(item_cadastrado => {
-        if(item_cadastrado.id == id){
-            item_cadastrado.qtd = qtd;
-        }
-    });
-    return true;
+
+    if(item_valido){
+        itens.forEach(item_cadastrado => {
+            if(item_cadastrado.id == id){
+                item_cadastrado.qtd = qtd;
+            }
+        });
+    }
+    
+    return item_valido;
 }
 
 module.exports = {
     adicionar,
     listar,
     editar
+};
+
+function is_id_cadastrado(id){
+    let id_cadastrado = false;
+    itens.forEach(item_cadastrado => {
+        if(item_cadastrado.id == id){
+            id_cadastrado = true;
+        }
+    });
+    return id_cadastrado;
 }
 
 function is_numerico(n){
@@ -42,34 +67,4 @@ function is_numerico(n){
         return false;
     }
     return true;
-}
-
-function is_id_cadastrado(id){
-    let item_existente = false;
-    itens.forEach(item_cadastrado => {
-        if(id == item_cadastrado.id){
-            item_existente = true;
-        }
-    });
-    return item_existente;
-}
-
-function validar_item_a_cadastrar(item){
-    let item_valido = true;
-    if(!is_numerico(item.id) || item.id <= 0){
-        item_valido = false;
-    }
-
-    if(is_id_cadastrado(item.id)){
-        item_valido = false; 
-    }
-
-    if(item.nome.length == 0){
-        item_valido = false; 
-    }
-
-    if(!is_numerico(item.qtd) || item.qtd < 0){
-        item_valido = false;
-    }
-    return item_valido;
 }

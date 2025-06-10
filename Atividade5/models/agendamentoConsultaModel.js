@@ -1,6 +1,7 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require('sequelize'); // Importa o Sequelize, que é a biblioteca ORM usada para manipular o banco de dados
+const db = require('../db'); //Importa a configuração do banco de dados (arquivo db.js) para conectar
 
+//const nao pode ser mudada, ou seja, imutavel
 const AgendamentoConsulta = db.define('agendamento_consulta', {
     id:{
         type: Sequelize.INTEGER,

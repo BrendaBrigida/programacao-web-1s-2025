@@ -1,26 +1,18 @@
-const express = require('express');
-const mustacheExpress = require('mustache-express');
-const db = require('./db');
-const app = express();
+const express = require('express'); //Importa o framework Express, que será usado para criar o servidor
+const mustacheExpress = require('mustache-express'); //Importa o motor de template Mustache para renderizar HTML com dados dinâmicos
+const db = require('./db'); //Importa o arquivo de conexão com o bd
+const app = express(); //Cria uma instância do aplicativo Express
 
-app.engine('html', mustacheExpress());
-app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
-app.use(express.urlencoded({extended: true}));
+app.engine('html', mustacheExpress()); //Define que arquivos com extensão .html serão renderizados usando o Mustache
+app.set('view engine', 'html'); //Define que o motor de views será o Mustache
+app.set('views', __dirname + '/views'); //Define o diretório onde estão os arquivos de visualização
+app.use(express.urlencoded({extended: true})); //Permite que o Express interprete os dados enviados via formulário (req.body)
 
-const agendamentoRouter = require('./routers/agendamentoRouter');
-app.use('/', agendamentoRouter);
+const agendamentoRouter = require('./routers/agendamentoRouter'); //Importa as rotas de agendamento definidas
+app.use('/', agendamentoRouter); //Usa as rotas importadas
 
-db.sync();
+db.sync(); //Cria as tabelas no banco, se ainda não existirem, com base nos modelos definidos
 
-//data
-const data = new Date()
-
-const dia = String(data.getDate()).padStart(2, '0') //1 -> 01
-const mes = String(data.getMonth() + 1).padStart(2, '0')
-const ano = data.getFullYear()
-
-const dataAtual = `${dia}/${mes}/${ano}`
 
 const PORT = 8080;
 app.listen(PORT, ()=>{

@@ -21,6 +21,7 @@ function postAgendarConsulta(req, res){
             res.redirect('/agendamentos');
         });
     }
+    
     else{
         //Se tiver campos inválidos, renderiza a página inicial com os erros e dados preenchidos para o usuário corrigir
         res.render('index.html', {campos_invalidos, dados_consulta});
